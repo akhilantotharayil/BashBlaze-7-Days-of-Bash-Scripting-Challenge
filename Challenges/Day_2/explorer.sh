@@ -1,23 +1,30 @@
 #!/bin/bash
 
-# Part 1: File and Directory Exploration
+# Welcome Message
 echo "Welcome to the Interactive File and Directory Explorer!"
+echo
 
+# Part 1: Display Files and Directories with Size
+echo "Files and Directories in the Current Path:"
+echo
+
+# Use 'du -sh *' to list all items with human-readable sizes
+du -sh * 2>/dev/null | while read size name; do
+    echo "- $name ($size)"
+done
+
+echo
+
+# Part 2: Character Counting
 while true; do
-    # List all files and directories in the current path
-    echo "Files and Directories in the Current Path:"
-    ls -lh
-
-    # Part 2: Character Counting
     read -p "Enter a line of text (Press Enter without text to exit): " input
 
-    # Exit if the user enters an empty string
     if [ -z "$input" ]; then
         echo "Exiting the Interactive Explorer. Goodbye!"
         break
     fi
 
-    # Calculate and print the character count for the input line
-    char_count=$(echo -n "$input" | wc -m)
-    echo "Character Count: $char_count"
+    echo "Character Count: ${#input}"
+    echo
 done
+
